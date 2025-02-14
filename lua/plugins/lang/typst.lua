@@ -16,7 +16,25 @@ return {
         "neovim/nvim-lspconfig",
         opts = {
             servers = {
-                tinymist = {},
+                tinymist = {
+                    keys = {
+                        {
+                            "<leader>cP",
+                            function()
+                                local buf_name = vim.api.nvim_buf_get_name(0)
+                                LazyVim.lsp.execute({
+                                    command = "tinymist.pinMain",
+                                    arguments = { buf_name },
+                                })
+                            end,
+                            desc = "Pin main file",
+                        },
+                    },
+                    single_file_support = true, -- Fixes LSP attachment in non-Git directories
+                    settings = {
+                        formatterMode = "typstyle",
+                    },
+                },
             },
         },
     },
@@ -26,40 +44,35 @@ return {
         optional = true,
         opts = {
             formatters_by_ft = {
-                typst = { "typstyle" },
+                typst = { "typstyle", lsp_format = "prefer" },
             },
         },
     },
 
     {
-        "nvimtools/none-ls.nvim",
-        optional = true,
-        opts = function(_, opts)
-            local nls = require("null-ls")
-            opts.sources = vim.list_extend(opts.sources or {}, {
-                nls.builtins.formatting.typstyle,
-            })
-        end,
+        "chomosuke/typst-preview.nvim",
+        cmd = { "TypstPreview", "TypstPreviewToggle", "TypstPreviewUpdate" },
+        keys = {
+            {
+                "<leader>cp",
+                ft = "typst",
+                "<cmd>TypstPreviewToggle<cr>",
+                desc = "Toggle Typst Preview",
+            },
+        },
+        opts = {
+            dependencies_bin = {
+                tinymist = "tinymist",
+            },
+        },
     },
 
-    -- {
-    --     "chomosuke/typst-preview.nvim",
-    --     cmd = { "TypstPreview" },
-    --     build = function()
-    --         require("typst-preview").update()
-    --     end,
-    --     keys = {
-    --         {
-    --             "<leader>cp",
-    --             ft = "typst",
-    --             "<cmd>TypstPreviewToggle<cr>",
-    --             desc = "Typst Preview",
-    --         },
-    --     },
-    --     opts = {
-    --         dependencies_bin = {
-    --             ["typst-preview"] = "tinymist",
-    --         },
-    --     },
-    -- },
+    {
+        "folke/ts-comments.nvim",
+        opts = {
+            lang = {
+                typst = { "// %s", "/* %s */" },
+            },
+        },
+    },
 }
