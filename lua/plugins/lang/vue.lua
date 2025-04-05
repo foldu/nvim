@@ -38,12 +38,12 @@ return {
             table.insert(opts.servers.vtsls.filetypes, "vue")
             local exe = vim.fn.exepath("vue-language-server")
             if exe == "" then
-                vim.notify("Can't find vue-language-server", vim.log.levels.ERROR)
+                -- vim.notify("Can't find vue-language-server", vim.log.levels.ERROR)
                 return
             end
             exe = vim.uv.fs_realpath(exe)
             local elems = vim.split(exe, "/")
-            local package_root = table.concat(elems, "/", 1, #elems - 1)
+            local package_root = table.concat(elems, "/", 1, #elems - 2)
             LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
                 {
                     name = "@vue/typescript-plugin",
