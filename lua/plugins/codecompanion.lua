@@ -7,7 +7,7 @@ return {
     opts = {
         strategies = {
             chat = {
-                adapter = "qwen2_5_coder",
+                adapter = "gemma3",
             },
             inline = {
                 adapter = "zeta",
@@ -35,7 +35,7 @@ return {
                     },
                 })
             end,
-            qwen2_5_coder = function()
+            gemma3 = function()
                 return require("codecompanion.adapters").extend("ollama", {
                     env = {
                         url = "http://100.64.0.4:11434",
@@ -45,7 +45,7 @@ return {
                     },
                     schema = {
                         model = {
-                            default = "qwen2.5-coder:14b",
+                            default = "gemma3:12b",
                         },
                         num_ctx = {
                             default = 16384,
