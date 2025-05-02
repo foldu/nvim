@@ -33,3 +33,7 @@ vim.g.clipboard = {
 }
 
 vim.o.shiftwidth = 4
+
+if vim.loop.os_uname().sysname == "Windows_NT" then
+    vim.o.shell = "pwsh"
+end
