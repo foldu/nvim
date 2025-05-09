@@ -37,3 +37,5 @@ vim.o.shiftwidth = 4
 if vim.loop.os_uname().sysname == "Windows_NT" then
     vim.o.shell = "pwsh"
 end
+
+vim.o.guifont = "Maple Mono NL NF CN"
