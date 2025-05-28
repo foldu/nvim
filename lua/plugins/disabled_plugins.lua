@@ -2,8 +2,6 @@ return {
     { "echasnovski/mini.indentscope", enabled = false },
     { "lukas-reineke/indent-blankline.nvim", enabled = false },
     { "akinsho/bufferline.nvim", enabled = false },
-    { "williamboman/mason-lspconfig.nvim", enabled = false },
-    { "williamboman/mason.nvim", enabled = false },
     {
         "nvim-neo-tree/neo-tree.nvim",
         enabled = false,

@@ -39,3 +39,13 @@ if vim.loop.os_uname().sysname == "Windows_NT" then
 end
 
 vim.o.guifont = "Maple Mono NL NF CN"
+
+vim.diagnostic.config({
+    virtual_text = true,
+    virtual_lines = { current_line = true },
+    float = {
+        border = "rounded",
+    },
+    underline = true,
+    update_in_insert = false,
+})
