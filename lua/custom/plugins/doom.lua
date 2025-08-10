@@ -1,4 +1,4 @@
 return {
-  'seandewar/actually-doom.nvim',
-  cmd = 'Doom',
+    "seandewar/actually-doom.nvim",
+    cmd = "Doom",
 }

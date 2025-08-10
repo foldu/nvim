@@ -227,8 +227,21 @@ return {
 
             -- Manually run vim.lsp.enable for all language servers that are *not* installed via Mason
             -- if not vim.tbl_isempty(servers.others) then
-            vim.lsp.enable("lua_ls")
-            vim.lsp.enable("vue_ls")
+            vim.lsp.enable({
+                "lua_ls",
+                "vue_ls",
+                "vtsls",
+                "ruff",
+                "basedpyright",
+                "tombi",
+                "postgres_lsp",
+                "yamlls",
+                "nixd",
+                "clangd",
+                "json-lsp",
+                "neocmake",
+                "bashls",
+            })
             -- end
         end,
     },

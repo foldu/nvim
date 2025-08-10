@@ -19,9 +19,9 @@ vim.o.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-    vim.o.clipboard = "unnamedplus"
-end)
+-- vim.schedule(function()
+--     vim.o.clipboard = "unnamedplus"
+-- end)
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -120,24 +120,6 @@ vim.keymap.set("v", ">", ">gv")
 -- redo like in helix
 -- vim.keymap.set("n", "U", "<C-r>")
 
--- don't copy empty lines
-vim.keymap.set("n", "dd", function()
-    if vim.api.nvim_get_current_line():match("^%s*$") then
-        return '"_dd'
-    else
-        return "dd"
-    end
-end, { expr = true })
-
--- don't copy empty lines
-vim.keymap.set("n", "cc", function()
-    if vim.api.nvim_get_current_line():match("^%s*$") then
-        return [["_cc]]
-    else
-        return "cc"
-    end
-end, { expr = true })
-
 -- properly indent on empty line
 -- vim.keymap.set("n", "i", function()
 --     if #vim.fn.getline(".") == 0 then
@@ -154,14 +136,12 @@ vim.keymap.set({ "v", "n" }, "<leader>y", [["+y]])
 vim.keymap.set({ "n" }, "<leader>Y", [["+Y]])
 vim.keymap.set({ "v", "n" }, "<leader>p", [["+p]])
 
-vim.g.clipboard = {
-    name = "OSC 52",
-    copy = {
-        ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-        ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-    },
-    paste = {
-        ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-        ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-    },
-}
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "only copy to system clipboard on explicit yank",
+    callback = function()
+        local ok, yank_data = pcall(vim.fn.getreg, [["]])
+        if ok and #yank_data > 0 and vim.v.operator == "y" then
+            require("vim.ui.clipboard.osc52").copy("+")({ yank_data })
+        end
+    end,
+})
