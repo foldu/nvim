@@ -5,6 +5,12 @@ return {
         lazy = true,
     },
     {
+        "echasnovski/mini.ai",
+        opts = {
+            n_lines = 500,
+        },
+    },
+    {
         "echasnovski/mini.files",
         opts = {
             windows = {
