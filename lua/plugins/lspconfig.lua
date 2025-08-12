@@ -78,12 +78,7 @@ return {
                     -- for LSP related items. It sets the mode, buffer and description for us each time.
                     local map = function(keys, func, desc, mode)
                         mode = mode or "n"
-                        vim.keymap.set(
-                            mode,
-                            keys,
-                            func,
-                            { buffer = event.buf, desc = "LSP: " .. desc }
-                        )
+                        vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
                     end
 
                     -- Rename the variable under your cursor.
@@ -134,15 +129,10 @@ return {
                     local client = vim.lsp.get_client_by_id(event.data.client_id)
                     if
                         client
-                        and client:supports_method(
-                            vim.lsp.protocol.Methods.textDocument_documentHighlight,
-                            event.buf
-                        )
+                        and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
                     then
-                        local highlight_augroup = vim.api.nvim_create_augroup(
-                            "kickstart-lsp-highlight",
-                            { clear = false }
-                        )
+                        local highlight_augroup =
+                            vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
                         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
                             buffer = event.buf,
                             group = highlight_augroup,
@@ -156,10 +146,7 @@ return {
                         })
 
                         vim.api.nvim_create_autocmd("LspDetach", {
-                            group = vim.api.nvim_create_augroup(
-                                "kickstart-lsp-detach",
-                                { clear = true }
-                            ),
+                            group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
                             callback = function(event2)
                                 vim.lsp.buf.clear_references()
                                 vim.api.nvim_clear_autocmds({
@@ -176,15 +163,10 @@ return {
                     -- This may be unwanted, since they displace some of your code
                     if
                         client
-                        and client:supports_method(
-                            vim.lsp.protocol.Methods.textDocument_inlayHint,
-                            event.buf
-                        )
+                        and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
                     then
                         map("<leader>th", function()
-                            vim.lsp.inlay_hint.enable(
-                                not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf })
-                            )
+                            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
                         end, "[T]oggle Inlay [H]ints")
                     end
                 end,
@@ -195,16 +177,14 @@ return {
             vim.diagnostic.config({
                 severity_sort = true,
                 float = { border = "rounded", source = "if_many" },
-                signs = vim.g.have_nerd_font
-                        and {
-                            text = {
-                                [vim.diagnostic.severity.ERROR] = "󰅚 ",
-                                [vim.diagnostic.severity.WARN] = "󰀪 ",
-                                [vim.diagnostic.severity.INFO] = "󰋽 ",
-                                [vim.diagnostic.severity.HINT] = "󰌶 ",
-                            },
-                        }
-                    or {},
+                signs = vim.g.have_nerd_font and {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = "󰅚 ",
+                        [vim.diagnostic.severity.WARN] = "󰀪 ",
+                        [vim.diagnostic.severity.INFO] = "󰋽 ",
+                        [vim.diagnostic.severity.HINT] = "󰌶 ",
+                    },
+                } or {},
                 virtual_text = {
                     source = "if_many",
                     spacing = 2,
@@ -246,4 +226,3 @@ return {
         end,
     },
 }
--- vim: ts=2 sts=2 sw=2 et

@@ -26,9 +26,7 @@ return {
                                             "meson.build",
                                             "meson_options.txt",
                                             "build.ninja"
-                                        )(fname) or require(
-                                            "lspconfig.util"
-                                        ).root_pattern(
+                                        )(fname) or require("lspconfig.util").root_pattern(
                                             "compile_commands.json",
                                             "compile_flags.txt"
                                         )(fname) or vim.fs.dirname(
@@ -63,9 +61,7 @@ return {
                         },
                         setup = {
                             clangd = function(_, opts)
-                                require("clangd_extensions").setup(
-                                    vim.tbl_deep_extend("force", {}, { server = opts })
-                                )
+                                require("clangd_extensions").setup(vim.tbl_deep_extend("force", {}, { server = opts }))
                                 return false
                             end,
                         },
