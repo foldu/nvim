@@ -129,13 +129,6 @@ vim.keymap.set("v", ">", ">gv")
 --     end
 -- end, { expr = true })
 
-vim.keymap.set({ "v", "n" }, "H", "^")
-vim.keymap.set({ "v", "n" }, "L", "$")
-
-vim.keymap.set({ "v", "n" }, "<leader>y", [["+y]])
-vim.keymap.set({ "n" }, "<leader>Y", [["+Y]])
-vim.keymap.set({ "v", "n" }, "<leader>p", [["+p]])
-
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "only copy to system clipboard on explicit yank",
     callback = function()
