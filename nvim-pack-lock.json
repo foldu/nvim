@@ -1,0 +1,65 @@
+{
+  "plugins": {
+    "blink.cmp": {
+      "version": "1.0.0 - 2.0.0"
+    },
+    "cobalt.nvim": {
+      "rev": "7df5b75"
+    },
+    "conform.nvim": {
+      "rev": "fbcb4fa"
+    },
+    "fzf-lua": {
+      "rev": "fcbf0cd"
+    },
+    "gitsigns.nvim": {
+      "rev": "1ee5c1f"
+    },
+    "kanagawa.nvim": {
+      "rev": "27f1e11"
+    },
+    "mason.nvim": {
+      "rev": "ad7146a"
+    },
+    "mini.nvim": {
+      "rev": "6a224dd"
+    },
+    "neogit": {
+      "rev": "0f48491a"
+    },
+    "nvim-autopairs": {
+      "rev": "7a2c97c"
+    },
+    "nvim-lspconfig": {
+      "rev": "ac98db2"
+    },
+    "nvim-surround": [],
+    "nvim-treesitter": {
+      "rev": "0606c7a9",
+      "version": "'main'"
+    },
+    "plenary.nvim": [],
+    "rustaceanvim": {
+      "rev": "2f5afad"
+    },
+    "techbase.nvim": {
+      "rev": "0da0261"
+    },
+    "tiny-code-action.nvim": {
+      "rev": "9b7359a"
+    },
+    "tiny-glimmer.nvim": [],
+    "todo-comments.nvim": {
+      "rev": "19d461d"
+    },
+    "treesitter-modules.nvim": {
+      "rev": "30fd375",
+      "src": "https://github.com/MeanderingProgrammer/treesitter-modules.nvim"
+    },
+    "vim-rsi": [],
+    "which-key.nvim": {
+      "rev": "b4177e3",
+      "src": "https://github.com/folke/which-key.nvim"
+    }
+  }
+}

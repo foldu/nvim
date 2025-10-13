@@ -1,20 +1,32 @@
 vim.lsp.enable({
     "bashls",
+
     "lua_ls",
+
     "vtsls",
-    "rust-analyzer",
     "vue_ls",
+    "tailwindcss",
+    "denols",
+
+    "rust-analyzer",
+
     "ruff",
     "basedpyright",
+
     "tombi",
+
     "postgres_lsp",
+
     "yamlls",
+
     "nixd",
+
     "clangd",
-    "json-lsp",
     "neocmake",
+
+    "json-lsp",
+
     "bashls",
-    "tailwindcss",
 })
 
 -- Diagnostic Config
@@ -62,11 +74,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end, "[G]oto Code [A]ction", { "n", "x" })
 
         -- Find references for the word under your cursor.
-        --map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+        map("grr", ":FzfLua lsp_references<CR>", "[G]oto [R]eferences")
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
-        --map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+        map("gri", ":FzfLua lsp_implementations<CR>", "[G]oto [I]mplementation")
 
         map("gd", ":FzfLua lsp_definitions<CR>", "[G]oto [D]efinition")
 

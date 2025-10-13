@@ -2,3 +2,22 @@
 vim.api.nvim_create_autocmd("TermOpen", {
     command = "startinsert",
 })
+
+local function close_buf(event)
+    vim.bo[event.buf].buflisted = false
+    vim.schedule(function()
+        vim.keymap.set("n", "q", function()
+            vim.cmd("close")
+            pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+        end, {
+            buffer = event.buf,
+            silent = true,
+            desc = "Quit buffer",
+        })
+    end)
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "dap-*", "qf", "git", "nvim-undotree", "help" },
+    callback = close_buf,
+})
