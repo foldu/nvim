@@ -6,6 +6,10 @@
     "cobalt.nvim": {
       "rev": "7df5b75"
     },
+    "codecompanion.nvim": {
+      "rev": "f8d5175",
+      "src": "https://github.com/olimorris/codecompanion.nvim"
+    },
     "conform.nvim": {
       "rev": "fbcb4fa"
     },

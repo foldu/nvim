@@ -45,6 +45,8 @@ require("ui")
 
 require("treesitter")
 
+require("code_companion")
+
 require("mason").setup({})
 
 require("nvim-surround").setup()
