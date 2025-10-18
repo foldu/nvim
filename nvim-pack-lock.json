@@ -46,6 +46,10 @@
       "rev": "0606c7a9",
       "version": "'main'"
     },
+    "opencode.nvim": {
+      "rev": "f8a3a88",
+      "src": "https://github.com/NickvanDyke/opencode.nvim"
+    },
     "plenary.nvim": [],
     "rustaceanvim": {
       "rev": "2f5afad"
