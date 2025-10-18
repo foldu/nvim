@@ -123,11 +123,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
-        map("<leader>cr", vim.lsp.buf.rename, "[R]e[n]ame")
+        map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        map("<leader>ca", function()
+        map("gra", function()
             require("tiny-code-action").code_action()
         end, "[G]oto Code [A]ction", { "n", "x" })
 
