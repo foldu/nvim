@@ -8,7 +8,7 @@ vim.keymap.set(
 )
 vim.keymap.set(
     { "n", "v" },
-    "<LocalLeader>cc",
+    "<LocalLeader>a",
     "<cmd>CodeCompanionChat Toggle<cr>",
     { noremap = true, silent = true }
 )
@@ -40,6 +40,17 @@ require("codecompanion").setup({
     strategies = {
         chat = {
             adapter = "gpt_oss",
+        },
+    },
+    display = {
+        chat = {
+            window = {
+                width = 0.45,
+                opts = {
+                    number = false,
+                    relativenumber = false,
+                },
+            },
         },
     },
 })

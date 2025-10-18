@@ -5,6 +5,7 @@ vim.pack.add({
     { src = "https://github.com/rachartier/tiny-glimmer.nvim" },
     { src = "https://github.com/rachartier/tiny-code-action.nvim" },
     { src = "https://github.com/ibhagwan/fzf-lua" },
+    { src = "https://github.com/OXY2DEV/markview.nvim" },
 })
 
 local miniclue = require("mini.clue")
@@ -166,3 +167,11 @@ require("tiny-glimmer").setup({
 })
 
 require("todo-comments").setup({})
+
+require("markview").setup({
+    preview = {
+        icon_provider = "mini",
+        filetypes = { "markdown", "codecompanion" },
+        ignore_buftypes = {},
+    },
+})

@@ -22,6 +22,10 @@
     "kanagawa.nvim": {
       "rev": "27f1e11"
     },
+    "markview.nvim": {
+      "rev": "c93ea99",
+      "src": "https://github.com/OXY2DEV/markview.nvim"
+    },
     "mason.nvim": {
       "rev": "ad7146a"
     },
