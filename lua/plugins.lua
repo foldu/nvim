@@ -45,7 +45,9 @@ require("ui")
 
 require("treesitter")
 
-require("code_companion")
+require("plugins/codecompanion")
+
+require("plugins/opencode")
 
 require("mason").setup({})
 
