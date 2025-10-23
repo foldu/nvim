@@ -3,11 +3,11 @@ vim.loader.enable()
 
 vim.pack.add({
     -- colorschemes
-    { src = "https://github.com/mcauley-penney/techbase.nvim" },
-    { src = "https://github.com/rebelot/kanagawa.nvim" },
-    { src = "https://github.com/wurli/cobalt.nvim" },
+    "https://github.com/mcauley-penney/techbase.nvim",
+    "https://github.com/rebelot/kanagawa.nvim",
+    "https://github.com/wurli/cobalt.nvim",
 
-    { src = "https://github.com/nvim-mini/mini.nvim" },
+    "https://github.com/nvim-mini/mini.nvim",
 })
 
 require("mini.notify").setup()
@@ -30,15 +30,15 @@ require("kanagawa").setup({
 vim.cmd.colorscheme("kanagawa")
 
 vim.pack.add({
-    { src = "https://github.com/mason-org/mason.nvim" },
-    { src = "https://github.com/kylechui/nvim-surround" },
-    { src = "https://github.com/tpope/vim-rsi" },
-    { src = "https://github.com/windwp/nvim-autopairs" },
+    "https://github.com/mason-org/mason.nvim",
+    "https://github.com/kylechui/nvim-surround",
+    "https://github.com/tpope/vim-rsi",
+    "https://github.com/windwp/nvim-autopairs",
     { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
-    { src = "https://github.com/stevearc/conform.nvim" },
-    { src = "https://github.com/nvim-lua/plenary.nvim" },
-    { src = "https://github.com/neovim/nvim-lspconfig" },
-    { src = "https://github.com/mrcjkb/rustaceanvim" },
+    "https://github.com/stevearc/conform.nvim",
+    "https://github.com/nvim-lua/plenary.nvim",
+    "https://github.com/neovim/nvim-lspconfig",
+    "https://github.com/mrcjkb/rustaceanvim",
 })
 
 require("ui")

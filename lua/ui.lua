@@ -1,10 +1,10 @@
 vim.pack.add({
-    { src = "https://github.com/folke/todo-comments.nvim" },
-    { src = "https://github.com/NeogitOrg/neogit" },
-    { src = "https://github.com/rachartier/tiny-glimmer.nvim" },
-    { src = "https://github.com/rachartier/tiny-code-action.nvim" },
-    { src = "https://github.com/ibhagwan/fzf-lua" },
-    { src = "https://github.com/OXY2DEV/markview.nvim" },
+    "https://github.com/folke/todo-comments.nvim",
+    "https://github.com/NeogitOrg/neogit",
+    "https://github.com/rachartier/tiny-glimmer.nvim",
+    "https://github.com/rachartier/tiny-code-action.nvim",
+    "https://github.com/ibhagwan/fzf-lua",
+    "https://github.com/OXY2DEV/markview.nvim",
     "https://github.com/sindrets/diffview.nvim",
 })
 

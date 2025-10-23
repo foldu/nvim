@@ -1,4 +1,4 @@
-vim.pack.add({ { src = "https://github.com/olimorris/codecompanion.nvim" } })
+vim.pack.add({ "https://github.com/olimorris/codecompanion.nvim" })
 
 vim.keymap.set(
     { "n", "v" },
