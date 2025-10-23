@@ -13,6 +13,10 @@
     "conform.nvim": {
       "rev": "fbcb4fa"
     },
+    "diffview.nvim": {
+      "rev": "4516612",
+      "src": "https://github.com/sindrets/diffview.nvim"
+    },
     "fzf-lua": {
       "rev": "fcbf0cd"
     },

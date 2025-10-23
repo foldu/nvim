@@ -24,6 +24,8 @@ require("nvim-treesitter").setup({
         "python",
         "ruby",
         "cmake",
+        "json",
+        "yaml",
     },
     -- Autoinstall languages that are not installed
     auto_install = true,
