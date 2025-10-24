@@ -6,6 +6,9 @@ vim.pack.add({
     "https://github.com/ibhagwan/fzf-lua",
     "https://github.com/OXY2DEV/markview.nvim",
     "https://github.com/sindrets/diffview.nvim",
+    "https://github.com/stevearc/oil.nvim",
+    "https://github.com/nvim-lualine/lualine.nvim",
+    "https://github.com/lewis6991/gitsigns.nvim",
 })
 
 local miniclue = require("mini.clue")
@@ -53,23 +56,58 @@ miniclue.setup({
     },
 })
 
-require("mini.files").setup({
-    windows = {
-        preview = true,
-        width_focus = 30,
-        width_preview = 30,
+-- require("mini.files").setup({
+--     windows = {
+--         preview = true,
+--         width_focus = 30,
+--         width_preview = 30,
+--     },
+--     options = {
+--         use_as_default_explorer = true,
+--     },
+-- })
+--
+-- vim.keymap.set({ "v", "n" }, "<leader>fm", function()
+--     require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
+-- end)
+-- vim.keymap.set({ "v", "n" }, "<leader>fM", function()
+--     require("mini.files").open(vim.uv.cwd(), true)
+-- end)
+
+require("oil").setup({
+    columns = {
+        "icon",
+        "permissions",
+        "size",
+        "mtime",
     },
-    options = {
-        use_as_default_explorer = true,
+    win_options = {
+        number = false,
+    },
+    keymaps = {
+        ["g?"] = { "actions.show_help", mode = "n" },
+        ["<CR>"] = "actions.select",
+        ["<C-s>"] = { "actions.select", opts = { vertical = true } },
+        ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
+        ["<C-t>"] = { "actions.select", opts = { tab = true } },
+        ["<C-p>"] = "actions.preview",
+        ["q"] = { "actions.close", mode = "n" },
+        ["<C-l>"] = "actions.refresh",
+        ["-"] = { "actions.parent", mode = "n" },
+        ["_"] = { "actions.open_cwd", mode = "n" },
+        ["`"] = { "actions.cd", mode = "n" },
+        ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
+        ["gs"] = { "actions.change_sort", mode = "n" },
+        ["gx"] = "actions.open_external",
+        ["g."] = { "actions.toggle_hidden", mode = "n" },
+        ["g\\"] = { "actions.toggle_trash", mode = "n" },
+    },
+    float = {
+        preview_split = "below",
     },
 })
 
-vim.keymap.set({ "v", "n" }, "<leader>fm", function()
-    require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
-end)
-vim.keymap.set({ "v", "n" }, "<leader>fM", function()
-    require("mini.files").open(vim.uv.cwd(), true)
-end)
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 require("fzf-lua").setup({})
 require("fzf-lua").register_ui_select(function(_, items)
@@ -83,9 +121,9 @@ require("fzf-lua").register_ui_select(function(_, items)
     return { winopts = { height = h, width = 0.60, row = 0.40 } }
 end)
 
-vim.keymap.set({ "v", "n" }, "<leader>/", "<cmd>FzfLua live_grep_native<CR>")
-vim.keymap.set({ "v", "n" }, "<leader><leader>", "<cmd>FzfLua files<CR>")
-vim.keymap.set({ "v", "n" }, "<leader>b", "<cmd>FzfLua buffers<CR>")
+vim.keymap.set({ "v", "n" }, "<leader>/", "<cmd>FzfLua live_grep_native<CR>", { desc = "Grep" })
+vim.keymap.set({ "v", "n" }, "<leader><leader>", "<cmd>FzfLua files<CR>", { desc = "Open file" })
+vim.keymap.set({ "v", "n" }, "<leader>b", "<cmd>FzfLua buffers<CR>", { desc = "Switch buffer" })
 
 require("tiny-code-action").setup({
     --- The backend to use, currently only "vim", "delta", "difftastic", "diffsofancy" are supported
@@ -176,10 +214,82 @@ require("markview").setup({
     },
 })
 
-require("mini.diff").setup({
-    view = {
-        style = "sign",
+vim.o.diffopt = "internal,filler,closeoff,inline:simple,linematch:40"
+
+require("diffview").setup({
+    keymaps = {
+        file_history_panel = { q = "<Cmd>DiffviewClose<CR>" },
+        file_panel = { q = "<Cmd>DiffviewClose<CR>" },
+        view = { q = "<Cmd>DiffviewClose<CR>" },
     },
 })
 
-vim.o.diffopt = "internal,filler,closeoff,inline:simple,linematch:40"
+require("lualine").setup({})
+
+require("gitsigns").setup({
+    on_attach = function(bufnr)
+        local gitsigns = require("gitsigns")
+
+        local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- Navigation
+        map("n", "]c", function()
+            if vim.wo.diff then
+                vim.cmd.normal({ "]c", bang = true })
+            else
+                gitsigns.nav_hunk("next")
+            end
+        end)
+
+        map("n", "[c", function()
+            if vim.wo.diff then
+                vim.cmd.normal({ "[c", bang = true })
+            else
+                gitsigns.nav_hunk("prev")
+            end
+        end)
+
+        -- Actions
+        map("n", "<leader>hs", gitsigns.stage_hunk)
+        map("n", "<leader>hr", gitsigns.reset_hunk)
+
+        map("v", "<leader>hs", function()
+            gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end)
+
+        map("v", "<leader>hr", function()
+            gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end)
+
+        map("n", "<leader>hS", gitsigns.stage_buffer)
+        map("n", "<leader>hR", gitsigns.reset_buffer)
+        map("n", "<leader>hp", gitsigns.preview_hunk)
+        map("n", "<leader>hi", gitsigns.preview_hunk_inline)
+
+        map("n", "<leader>hb", function()
+            gitsigns.blame_line({ full = true })
+        end)
+
+        map("n", "<leader>hd", gitsigns.diffthis)
+
+        map("n", "<leader>hD", function()
+            gitsigns.diffthis("~")
+        end)
+
+        map("n", "<leader>hQ", function()
+            gitsigns.setqflist("all")
+        end)
+        map("n", "<leader>hq", gitsigns.setqflist)
+
+        -- Toggles
+        map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
+        map("n", "<leader>tw", gitsigns.toggle_word_diff)
+
+        -- Text object
+        map({ "o", "x" }, "ih", gitsigns.select_hunk)
+    end,
+})

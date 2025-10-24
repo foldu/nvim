@@ -13,7 +13,7 @@ vim.pack.add({
 require("mini.notify").setup()
 require("mini.icons").setup()
 require("mini.ai").setup()
-require("mini.statusline").setup()
+-- require("mini.statusline").setup()
 
 require("kanagawa").setup({
     compile = true,

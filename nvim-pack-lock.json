@@ -26,6 +26,10 @@
     "kanagawa.nvim": {
       "rev": "27f1e11"
     },
+    "lualine.nvim": {
+      "rev": "3946f01",
+      "src": "https://github.com/nvim-lualine/lualine.nvim"
+    },
     "markview.nvim": {
       "rev": "c93ea99",
       "src": "https://github.com/OXY2DEV/markview.nvim"
@@ -49,6 +53,10 @@
     "nvim-treesitter": {
       "rev": "0606c7a9",
       "version": "'main'"
+    },
+    "oil.nvim": {
+      "rev": "7e1cd77",
+      "src": "https://github.com/stevearc/oil.nvim"
     },
     "opencode.nvim": {
       "rev": "f8a3a88",
