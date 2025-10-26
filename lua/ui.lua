@@ -9,6 +9,7 @@ vim.pack.add({
     "https://github.com/stevearc/oil.nvim",
     "https://github.com/nvim-lualine/lualine.nvim",
     "https://github.com/lewis6991/gitsigns.nvim",
+    "https://github.com/folke/snacks.nvim",
 })
 
 local miniclue = require("mini.clue")
@@ -292,4 +293,8 @@ require("gitsigns").setup({
         -- Text object
         map({ "o", "x" }, "ih", gitsigns.select_hunk)
     end,
+})
+
+require("snacks").setup({
+    image = {},
 })
