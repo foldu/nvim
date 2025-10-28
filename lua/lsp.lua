@@ -49,64 +49,64 @@ vim.lsp.enable({
 --     -- Display multiline diagnostics as virtual lines
 --     virtual_lines = true,
 -- })
-vim.diagnostic.config({
-    severity_sort = true,
-    -- float = {
-    --     focus = false,
-    --     scope = "cursor",
-    --     border = "rounded",
-    -- },
-    float = {
-        max_width = 90,
-        wrap = true,
-        source = "if_many",
-        border = "rounded",
-        close_events = {},
-    },
-    signs = {
-        numhl = {
-            [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-            [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-            [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-        },
-        text = {
-            [vim.diagnostic.severity.ERROR] = "",
-            [vim.diagnostic.severity.HINT] = "",
-            [vim.diagnostic.severity.INFO] = "",
-            [vim.diagnostic.severity.WARN] = "",
-        },
-    },
-    update_in_insert = true,
-    virtual_text = false,
-    virtual_lines = false,
-})
-
-local function close_floating_window(win_id)
-    if type(win_id) == "number" and vim.api.nvim_win_is_valid(win_id) then
-        vim.api.nvim_win_close(win_id, true)
-    end
-end
-
-local lnum, win_id = nil, nil
-
-vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved" }, {
-    desc = "line change to close floating window",
-    group = vim.api.nvim_create_augroup("diagnostic_float", { clear = true }),
-    callback = function()
-        if lnum == nil then
-            lnum = vim.fn.line(".")
-            _, win_id = vim.diagnostic.open_float(nil)
-        else
-            local currentline = vim.fn.line(".")
-            if lnum ~= currentline then
-                close_floating_window(win_id)
-                lnum = currentline
-                _, win_id = vim.diagnostic.open_float(nil)
-            end
-        end
-    end,
-})
+-- vim.diagnostic.config({
+--     severity_sort = true,
+--     -- float = {
+--     --     focus = false,
+--     --     scope = "cursor",
+--     --     border = "rounded",
+--     -- },
+--     float = {
+--         max_width = 90,
+--         wrap = true,
+--         source = "if_many",
+--         border = "rounded",
+--         close_events = {},
+--     },
+--     signs = {
+--         numhl = {
+--             [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+--             [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+--             [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+--             [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+--         },
+--         text = {
+--             [vim.diagnostic.severity.ERROR] = "",
+--             [vim.diagnostic.severity.HINT] = "",
+--             [vim.diagnostic.severity.INFO] = "",
+--             [vim.diagnostic.severity.WARN] = "",
+--         },
+--     },
+--     update_in_insert = true,
+--     virtual_text = false,
+--     virtual_lines = false,
+-- })
+--
+-- local function close_floating_window(win_id)
+--     if type(win_id) == "number" and vim.api.nvim_win_is_valid(win_id) then
+--         vim.api.nvim_win_close(win_id, true)
+--     end
+-- end
+--
+-- local lnum, win_id = nil, nil
+--
+-- vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved" }, {
+--     desc = "line change to close floating window",
+--     group = vim.api.nvim_create_augroup("diagnostic_float", { clear = true }),
+--     callback = function()
+--         if lnum == nil then
+--             lnum = vim.fn.line(".")
+--             _, win_id = vim.diagnostic.open_float(nil)
+--         else
+--             local currentline = vim.fn.line(".")
+--             if lnum ~= currentline then
+--                 close_floating_window(win_id)
+--                 lnum = currentline
+--                 _, win_id = vim.diagnostic.open_float(nil)
+--             end
+--         end
+--     end,
+-- })
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),

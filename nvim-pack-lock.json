@@ -66,6 +66,7 @@
     "rustaceanvim": {
       "rev": "2f5afad"
     },
+    "snacks.nvim": [],
     "techbase.nvim": {
       "rev": "0da0261"
     },
@@ -73,6 +74,10 @@
       "rev": "9b7359a"
     },
     "tiny-glimmer.nvim": [],
+    "tiny-inline-diagnostic.nvim": {
+      "rev": "8e633cc",
+      "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
+    },
     "todo-comments.nvim": {
       "rev": "19d461d"
     },

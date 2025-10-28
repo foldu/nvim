@@ -10,7 +10,10 @@ vim.pack.add({
     "https://github.com/nvim-lualine/lualine.nvim",
     "https://github.com/lewis6991/gitsigns.nvim",
     "https://github.com/folke/snacks.nvim",
+    "https://github.com/rachartier/tiny-inline-diagnostic.nvim",
 })
+
+require("tiny-inline-diagnostic").setup({})
 
 local miniclue = require("mini.clue")
 miniclue.setup({
