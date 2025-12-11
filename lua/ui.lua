@@ -301,3 +301,5 @@ require("gitsigns").setup({
 require("snacks").setup({
     image = {},
 })
+
+require("mini.cmdline").setup({})
