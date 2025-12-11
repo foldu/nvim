@@ -10,6 +10,9 @@ jobs:
     name: "Mirror from codeberg"
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Mirror
         # no reason for setting the git config usernames/emails etc. but good idea
         # if I copy paste something
