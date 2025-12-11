@@ -1,5 +1,8 @@
 name: Mirror from codeberg
 
+permissions:
+  contents: write
+
 on:
   schedule:
     # every day at 3 UTC
