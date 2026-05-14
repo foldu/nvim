@@ -13,7 +13,7 @@ vim.o.number = true
 vim.o.mouse = "a"
 
 -- Don't show the mode, since it's already in the status line
-vim.o.showmode = false
+-- vim.o.showmode = false
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -71,8 +71,13 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
--- disable thing I'm not using anyway
-vim.o.complete = ""
+vim.o.complete = ".,o"
+-- vim.o.completeopt = "fuzzy,menuone,noselect" -- add 'popup' for docs (sometimes)
+vim.o.pumborder = 'rounded'
+vim.o.pummaxwidth = 40
+vim.o.completeopt = 'menu,menuone,noselect,nearest'
+vim.o.autocomplete = true
+-- vim.o.pumheight = 7
 
 -- really make sure editorconfig is enabled
 vim.g.editorconfig = true
@@ -138,3 +143,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         end
     end,
 })
+
+-- enable far better command and press enter to blah ui
+require('vim._core.ui2').enable()
