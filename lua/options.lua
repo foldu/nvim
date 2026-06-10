@@ -71,12 +71,12 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
-vim.o.complete = ".,o"
--- vim.o.completeopt = "fuzzy,menuone,noselect" -- add 'popup' for docs (sometimes)
-vim.o.pumborder = 'rounded'
+vim.o.complete = ".,w,b,kspell" -- Use less sources
+vim.o.completeopt = "menuone,noselect,fuzzy,nosort" -- Use custom behavior
+vim.o.completetimeout = 100 -- Limit sources delay
+vim.o.pumborder = "rounded"
 vim.o.pummaxwidth = 40
-vim.o.completeopt = 'menu,menuone,noselect,nearest'
-vim.o.autocomplete = true
+-- vim.o.autocomplete = true
 -- vim.o.pumheight = 7
 
 -- really make sure editorconfig is enabled
@@ -92,7 +92,7 @@ vim.o.shortmess = vim.o.shortmess .. "I"
 vim.g.messagesopt = "history:500"
 
 -- minimize cmd height
-vim.o.cmdheight = 1
+vim.o.cmdheight = 0
 
 -- disable swapfiles they're annoying
 vim.o.swapfile = false
@@ -144,5 +144,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.hl.on_yank()`
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight when yanking (copying) text",
+    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+    callback = function()
+        vim.hl.hl_op()
+    end,
+})
+
 -- enable far better command and press enter to blah ui
-require('vim._core.ui2').enable()
+require("vim._core.ui2").enable()
