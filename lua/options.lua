@@ -97,17 +97,6 @@ vim.o.swapfile = false
 -- actually write out files
 vim.o.fsync = true
 
-vim.api.nvim_create_autocmd("BufReadPost", {
-    desc = "Restore cursor to file position in previous editing session",
-    callback = function(args)
-        local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
-        local line_count = vim.api.nvim_buf_line_count(args.buf)
-        if mark[1] > 0 and mark[1] <= line_count then
-            vim.cmd('normal! g`"zz')
-        end
-    end,
-})
-
 -- use powerSHIT on windows
 if vim.loop.os_uname().sysname == "Windows_NT" then
     vim.o.shell = "pwsh"
@@ -130,27 +119,6 @@ vim.keymap.set("v", ">", ">gv")
 --         return "i"
 --     end
 -- end, { expr = true })
-
-vim.api.nvim_create_autocmd("TextYankPost", {
-    desc = "only copy to system clipboard on explicit yank",
-    callback = function()
-        local ok, yank_data = pcall(vim.fn.getreg, [["]])
-        if ok and #yank_data > 0 and vim.v.operator == "y" then
-            require("vim.ui.clipboard.osc52").copy("+")({ yank_data })
-        end
-    end,
-})
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.hl.on_yank()`
-vim.api.nvim_create_autocmd("TextYankPost", {
-    desc = "Highlight when yanking (copying) text",
-    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-    callback = function()
-        vim.hl.hl_op()
-    end,
-})
 
 -- enable far better command and press enter to blah ui
 require("vim._core.ui2").enable()
