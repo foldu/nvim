@@ -45,7 +45,7 @@ require("conform").setup({
     },
     -- Map of filetype to formatters
     -- Make sure that necessary CLI tool is available
-    formatters_by_ft = { lua = { "stylua" } },
+    formatters_by_ft = { lua = { "stylua" }, nix = { "nixfmt" } },
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
