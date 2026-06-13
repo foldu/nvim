@@ -85,11 +85,8 @@ vim.g.editorconfig = true
 -- allow vim to set title
 vim.o.title = true
 
--- disable greeting message
-vim.o.shortmess = vim.o.shortmess .. "I"
-
--- i will _not_ press enter to continue
-vim.g.messagesopt = "history:500"
+-- disable greeting message and other useless things
+vim.o.shortmess = "CFOSWacoI"
 
 -- minimize cmd height
 vim.o.cmdheight = 0
