@@ -9,12 +9,17 @@ vim.pack.add({
 vim.diagnostic.config({
     update_in_insert = false,
     severity_sort = true,
-    float = { border = "rounded", source = "if_many" },
+    float = {
+        max_width = 90,
+        wrap = true,
+        source = "if_many",
+        border = "rounded",
+    },
     underline = { severity = { min = vim.diagnostic.severity.WARN } },
 
     -- Can switch between these as you prefer
     virtual_text = false, -- Text shows up at the end of the line
-    virtual_lines = true, -- Text shows up underneath the line, with virtual lines
+    virtual_lines = false, -- Text shows up underneath the line, with virtual lines
 
     -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
     jump = {
@@ -26,6 +31,32 @@ vim.diagnostic.config({
             })
         end,
     },
+})
+
+local function close_floating_window(win_id)
+    if type(win_id) == "number" and vim.api.nvim_win_is_valid(win_id) then
+        vim.api.nvim_win_close(win_id, true)
+    end
+end
+
+local lnum, win_id = nil, nil
+
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved" }, {
+    desc = "line change to close floating window",
+    group = vim.api.nvim_create_augroup("diagnostic_float", { clear = true }),
+    callback = function()
+        if lnum == nil then
+            lnum = vim.fn.line(".")
+            _, win_id = vim.diagnostic.open_float(nil)
+        else
+            local currentline = vim.fn.line(".")
+            if lnum ~= currentline then
+                close_floating_window(win_id)
+                lnum = currentline
+                _, win_id = vim.diagnostic.open_float(nil)
+            end
+        end
+    end,
 })
 
 -- See also:
