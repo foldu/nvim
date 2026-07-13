@@ -3,6 +3,7 @@ vim.pack.add({
     "https://github.com/nvim-mini/mini.nvim",
     "https://github.com/kylechui/nvim-surround",
     "https://github.com/tpope/vim-rsi",
+    "https://github.com/romus204/tree-sitter-manager.nvim",
 })
 
 require("mini.statusline").setup()
@@ -87,3 +88,31 @@ hipatterns.setup({
 })
 
 require("mini.trailspace").setup()
+
+require("tree-sitter-manager").setup({
+    ensure_installed = {
+        "bash",
+        "c",
+        "cpp",
+        "css",
+        "go",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "nix",
+        "python",
+        "query",
+        "regex",
+        "rust",
+        "toml",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "vue",
+        "yaml",
+    },
+    highlight = true,
+})
